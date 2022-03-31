@@ -10,7 +10,7 @@ locals {
 }
 
 ## 2022/02/08
-resource "aws_s3_bucket" "s3_artifact" {
+resource "aws_s3_bucket" "s3_artifacts" {
   bucket = "s3-spinnaker-artifact"
   acl    = "public-read-write"
   versioning {
