@@ -27,41 +27,41 @@ halyard:
       configure_basic.sh: |-
         echo "exception handling for null command"
 
-        # export VK8S_PATH='spinnaker/k8configs/arn:aws:eks:ap-northeast-2:481230465846:cluster' #Prefix V for Vault
-        # export LK8S_PATH='/tmp/k8configs' #Prefix L for Local
-        # export R_FILE=/tmp/remote.txt
-        # export L_FILE=/tmp/local.txt
-        # export NEWKEYS=/tmp/newkeys.txt
-        # #Make sure vault CLI is available
-        # command -v vault > /dev/null 2>&1
-        # if [ $? -ne 0 ]; then
-        #   echo "Vault CLI is not available, exiting..."
-        #   exit
-        # fi
-        # #Create local config path if not exists
-        # [ ! -d $LK8S_PATH ] && (mkdir -p $LK8S_PATH; echo Created k8sconfig directory) #|| echo Content mkdir -p $LK8S_PATH
-        # #Set-1
-        # vault kv list $VK8S_PATH | egrep -iv 'Keys|----' > $R_FILE
-        # #Set-2
-        # ls -1 $LK8S_PATH | sed s/\.yml$// > $L_FILE
-        # #New in Vault
-        # comm -23 $R_FILE $L_FILE > $NEWKEYS
-        # if [ ! -s $NEWKEYS ]; then
-        #   echo "There are no new kubeconfigs to download"
-        #   exit
-        # fi
-        # #Download new kubeconfig file from Vault
-        # for i in `cat $NEWKEYS`; do
-        #   echo -en "Fetching kubeconfig file of Account : $i"
-        #   vault kv get -field=kubeconfig $VK8S_PATH/$i > $LK8S_PATH/$i.yml
-        #   if [ $? -eq 0 ]; then
-        #     echo " [success]"
-        #     echo "  File: $LK8S_PATH/$i.yml"
-        #   else
-        #     echo " [failed with return code $?]"
-        #   fi
-        # done
-        # echo "Completed Kubeconfig downlod syncing"
+        export VK8S_PATH='spinnaker/k8configs/arn:aws:eks:ap-northeast-2:481230465846:cluster' #Prefix V for Vault
+        export LK8S_PATH='/tmp/k8configs' #Prefix L for Local
+        export R_FILE=/tmp/remote.txt
+        export L_FILE=/tmp/local.txt
+        export NEWKEYS=/tmp/newkeys.txt
+        #Make sure vault CLI is available
+        command -v vault > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+          echo "Vault CLI is not available, exiting..."
+          exit
+        fi
+        #Create local config path if not exists
+        [ ! -d $LK8S_PATH ] && (mkdir -p $LK8S_PATH; echo Created k8sconfig directory) #|| echo Content mkdir -p $LK8S_PATH
+        #Set-1
+        vault kv list $VK8S_PATH | egrep -iv 'Keys|----' > $R_FILE
+        #Set-2
+        ls -1 $LK8S_PATH | sed s/\.yml$// > $L_FILE
+        #New in Vault
+        comm -23 $R_FILE $L_FILE > $NEWKEYS
+        if [ ! -s $NEWKEYS ]; then
+          echo "There are no new kubeconfigs to download"
+          exit
+        fi
+        #Download new kubeconfig file from Vault
+        for i in `cat $NEWKEYS`; do
+          echo -en "Fetching kubeconfig file of Account : $i"
+          vault kv get -field=kubeconfig $VK8S_PATH/$i > $LK8S_PATH/$i.yml
+          if [ $? -eq 0 ]; then
+            echo " [success]"
+            echo "  File: $LK8S_PATH/$i.yml"
+          else
+            echo " [failed with return code $?]"
+          fi
+        done
+        echo "Completed Kubeconfig downlod syncing"
  
         # #### spinnaker HA START ####
         # CLOUD_DRIVER_WORK=3
