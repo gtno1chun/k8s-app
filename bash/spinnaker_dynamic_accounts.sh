@@ -101,10 +101,8 @@ create_kubeconfig_json
 
 function vault_put() {
   config_variable
-  k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' ) 
 
   # export VAULT_ADDR='http://15.165.41.118:10200'
-
   vault login jackchun-token
   ##test
   vault kv list spinnaker
@@ -114,10 +112,8 @@ function vault_put() {
 
  for i in $count_cluster
   do
-    cluster_name=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" )
-    k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' )
-
-    vault kv put spinnaker/k8configs/$cluster_name kubeconfig=@config_$k8s_configs
+    k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' ) 
+    vault kv put spinnaker/k8configs/$k8s_configs kubeconfig=@config_$k8s_configs
   done
 
 }
