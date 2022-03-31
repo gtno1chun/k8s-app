@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "s3_artifacts" {
     enabled = false
   }
   tags = {
-    Name = "s3-spinnaker-artifacts-jackchun"
+    Name = "s3-spinnaker-artifacts"
     Class0 = "Operation"
     Class1 = "Build"
     developer = "vaultcloud-user"
