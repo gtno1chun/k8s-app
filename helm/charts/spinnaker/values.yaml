@@ -201,22 +201,22 @@ halyard:
       #        - spinnaker-admin
       #     executeFallback: 'WRITE'
       
-      # ### CJB
-      # spinnakerconfig.yml: 
-      #   spring:
-      #     profiles:
-      #       include: vault
-      #     cloud:
-      #       config:
-      #         server:
-      #           vault:
-      #             host: 15.165.41.118
-      #             port: 10200
-      #             backend: spinnaker
-      #             kvVersion: 2
-      #             scheme: http
-      #             defaultKey: clouddriver
-      #             token: ${VAULT_TOKEN}
+      ### CJB
+      spinnakerconfig.yml: 
+        spring:
+          profiles:
+            include: vault
+          cloud:
+            config:
+              server:
+                vault:
+                  host: 15.165.41.118
+                  port: 10200
+                  backend: spinnaker
+                  kvVersion: 2
+                  scheme: http
+                  defaultKey: clouddriver
+                  token: ${VAULT_TOKEN}
         
   ## Define custom settings for Spinnaker services. Read more for details:
   ## https://www.spinnaker.io/reference/halyard/custom/#custom-service-settings
