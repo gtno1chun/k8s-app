@@ -11,4 +11,3 @@ module "ebs_csi_driver_controller" {
   ebs_csi_controller_role_policy_name_prefix = "AmazonEKS_EBS_CSI_Driver_Policy"
   oidc_url                                   = aws_iam_openid_connect_provider.openid_connect.url
 }
-
