@@ -11,13 +11,13 @@ locals {
 
 ## 2022/02/08
 resource "aws_s3_bucket" "s3_artifacts" {
-  bucket = "s3-spinnaker-artifacts"
+  bucket = "s3-spinnaker-artifact"
   acl    = "public-read-write"
   versioning {
     enabled = false
   }
   tags = {
-    Name = "s3-spinnaker-artifacts"
+    Name = "s3-spinnaker-artifact"
     Class0 = "Operation"
     Class1 = "Build"
     developer = "vaultcloud-user"
