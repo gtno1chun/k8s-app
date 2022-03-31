@@ -1,0 +1,24 @@
+resource "helm_release" "kube2iam" {
+  name          = "kube2iam"
+  namespace     = "kube-system"
+  repository    = "https://jtblin.github.io/kube2iam/"
+  chart         = "kube2iam" 
+
+  # set {
+  #   name  = "extraArgs.base-role-arn"
+  #   #value = "arn:aws:iam::481230465846:role/"
+  #   value = "arn:aws:iam::481230465846:role/VaultCloud-Role"
+  # }
+  # set {
+  #   name    = "extraArgs.default-role"
+  #   value   = "kube2iam-default" 
+  # }
+  # set {
+  #   name    = "host.iptables"
+  #   value   = true 
+  # } 
+  # set {
+  #   name    = "host.interface"
+  #   value   = "cbr0"
+  # }
+}
