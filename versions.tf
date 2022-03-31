@@ -20,5 +20,4 @@ terraform {
       version = ">= 2.1"
     }
   }
-}
-
+} 
