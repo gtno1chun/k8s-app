@@ -3,12 +3,11 @@ resource "kubernetes_namespace" "spinnaker_ns" {
     annotations = {
       name = "spinnaker" 
     }
+    labels = {
+      role = "spinnaker-role" 
+    }
+    name = "spinnaker" 
   }
-  labels = {
-    role = "spinnaker-role" 
-  }
-  name = "spinnaker" 
-
 }
 
 resource "kubernetes_service_account" "spinnaker_sa" {
