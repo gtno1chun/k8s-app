@@ -1,19 +1,15 @@
-# locals {  
-#   spinnaker_stable_ns = "spinnaker-stable"
-# }
-
 resource "kubernetes_namespace" "spinnaker_ns" {
   metadata {
     annotations = {
-      name = "spinnaker"
+      name = "spinnaker" 
     }
-    labels = {
-      role = "spinnaker-admin"
-    }
-    name = "spinnaker"
   }
-}
+  labels = {
+    role = "spinnaker-role" 
+  }
+  name = "spinnaker" 
 
+}
 
 resource "kubernetes_service_account" "spinnaker_sa" {
 
@@ -25,46 +21,6 @@ resource "kubernetes_service_account" "spinnaker_sa" {
   }
 }
 
-resource "kubernetes_cluster_role_binding" "spinnaker_rolebinding" {
-
-  depends_on = [
-    kubernetes_namespace.spinnaker_ns,
-    kubernetes_service_account.spinnaker_sa
-  ]
-
-  metadata {
-    name = "spinnaker-admin"
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "cluster-admin"
-  }
-  subject {
-    kind      = "ServiceAccount"
-    name      = "spinnaker-service-account"
-    namespace = "spinnaker"
-  }
-}
-
-# # "TG" = ["namespaces"]
-variable "roles" {
-  default = {
-    "jackchun-spin" = ["jackchun-eks-7clj", "jackchun-eks-test", "jackchun-eks-xojt"]
-  }
-}
-
-resource "kubernetes_service_account" "spinnaker_service_account" {
-
-  depends_on = [kubernetes_namespace.spinnaker_ns]
-
-  count = length(var.roles)
-
-  metadata {
-    name      = "spinnaker-service-account-${keys(var.roles)[count.index]}"
-    namespace = "spinnaker"
-  }
-}
 
 resource "kubernetes_cluster_role" "spinnaker-role" {
   metadata {
@@ -100,5 +56,27 @@ resource "kubernetes_cluster_role" "spinnaker-role" {
     api_groups = [""]
     resources  = ["services/proxy", "pods/portforward"]
     verbs      = ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "spinnaker_rolebinding" {
+
+  depends_on = [
+    kubernetes_namespace.spinnaker_ns,
+    kubernetes_service_account.spinnaker_sa
+  ]
+
+  metadata {
+    name = "spinnaker-role-binding"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "spinnaker-role"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "spinnaker-service-account"
+    namespace = "spinnaker"
   }
 }
