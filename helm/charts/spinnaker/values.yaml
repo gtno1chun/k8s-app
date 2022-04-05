@@ -92,7 +92,7 @@ halyard:
                   backend: spinnaker
                   kvVersion: 2
                   scheme: http
-                  defaultKey: jackchun-eks-pWjV
+                  defaultKey: clouddriver/jackchun-eks-pWjV
                   token: ${VAULT_TOKEN}
         
   ## Define custom settings for Spinnaker services. Read more for details:
