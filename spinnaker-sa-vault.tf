@@ -1,5 +1,5 @@
-resource "vault_generic_secret" "example" {
-  path = "spinnaker-test"
+resource "vault_generic_secret" "eks-37Xf" {
+  path = "spinnaker-test/jackchun-eks-37Xf"
   
   data_json = <<EOT
 {
