@@ -27,11 +27,134 @@ halyard:
       configure_basic.sh: |-
         echo "exception handling for null command"
 
+        # export VK8S_PATH='spinnaker/k8configs/arn:aws:eks:ap-northeast-2:481230465846:cluster' #Prefix V for Vault
+        # export LK8S_PATH='/tmp/k8configs' #Prefix L for Local
+        # export R_FILE=/tmp/remote.txt
+        # export L_FILE=/tmp/local.txt
+        # export NEWKEYS=/tmp/newkeys.txt
+        # #Make sure vault CLI is available
+        # command -v vault > /dev/null 2>&1
+        # if [ $? -ne 0 ]; then
+        #   echo "Vault CLI is not available, exiting..."
+        #   exit
+        # fi
+        # #Create local config path if not exists
+        # [ ! -d $LK8S_PATH ] && (mkdir -p $LK8S_PATH; echo Created k8sconfig directory) #|| echo Content mkdir -p $LK8S_PATH
+        # #Set-1
+        # vault kv list $VK8S_PATH | egrep -iv 'Keys|----' > $R_FILE
+        # #Set-2
+        # ls -1 $LK8S_PATH | sed s/\.yml$// > $L_FILE
+        # #New in Vault
+        # comm -23 $R_FILE $L_FILE > $NEWKEYS
+        # if [ ! -s $NEWKEYS ]; then
+        #   echo "There are no new kubeconfigs to download"
+        #   exit
+        # fi
+        # #Download new kubeconfig file from Vault
+        # for i in `cat $NEWKEYS`; do
+        #   echo -en "Fetching kubeconfig file of Account : $i"
+        #   vault kv get -field=kubeconfig $VK8S_PATH/$i > $LK8S_PATH/$i.yml
+        #   if [ $? -eq 0 ]; then
+        #     echo " [success]"
+        #     echo "  File: $LK8S_PATH/$i.yml"
+        #   else
+        #     echo " [failed with return code $?]"
+        #   fi
+        # done
+        # echo "Completed Kubeconfig downlod syncing"
+ 
+        # #### spinnaker HA START ####
+        # CLOUD_DRIVER_WORK=3
+        # if   [ $CLOUD_DRIVER_WORK -eq 1 ]; then  
+        #     $HAL_COMMAND config deploy ha clouddriver enable
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-caching edit --replicas 2 --container-requests-cpu 250m    --container-limits-cpu 1000m    --container-requests-memory 1Gi   --container-limits-memory 1Gi  
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-ro      edit --replicas 2 --container-requests-cpu 250m --container-limits-cpu 1000m --container-requests-memory 512Mi   --container-limits-memory 1Gi  
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-rw      edit --replicas 2 --container-requests-cpu 250m --container-limits-cpu 1000m --container-requests-memory 512Mi --container-limits-memory 1Gi
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-ro-deck edit --replicas 2 --container-requests-cpu 250m --container-limits-cpu 1000m --container-requests-memory 512Mi   --container-limits-memory 1Gi  
+        # elif [ $CLOUD_DRIVER_WORK -eq 2 ]; then  
+        #     $HAL_COMMAND config deploy ha clouddriver disable 
+        #     $HAL_COMMAND config deploy component-sizing clouddriver delete
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-caching delete 
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-ro      delete 
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-rw      delete 
+        #     $HAL_COMMAND config deploy component-sizing clouddriver-ro-deck delete 
+        # elif [ $CLOUD_DRIVER_WORK -eq 3 ]; then   
+        #     echo 'no work cloud-driver'
+        # fi
 
+        # ECHO_HA_WORK=3
+        # # ECHO_HA_WORK 1 HA install,  2: HA disable   
+        # if   [ $ECHO_HA_WORK -eq 1 ]; then  
+        #     $HAL_COMMAND config deploy ha echo enable 
 
+        #     $HAL_COMMAND config deploy component-sizing echo-scheduler      edit --replicas 1 --container-requests-cpu 100m --container-limits-cpu 100m --container-requests-memory 600Mi --container-limits-memory 600Mi                                   
+        #     $HAL_COMMAND config deploy component-sizing echo-worker         edit --replicas 1 --container-requests-cpu 100m --container-limits-cpu 100m --container-requests-memory 600Mi --container-limits-memory 600Mi
+        # elif [ $ECHO_HA_WORK -eq 2 ]; then              
+        #     $HAL_COMMAND config deploy ha echo disable 
+        #     $HAL_COMMAND config deploy component-sizing echo delete            
+        # fi
 
+        # SPINNAKER_RESOURCE=2
+        # if [ $SPINNAKER_RESOURCE -eq 1 ]; then
+        #     $HAL_COMMAND config deploy component-sizing orca-bootstrap           edit --replicas 1 --container-requests-cpu 250m --container-limits-cpu 1    --container-requests-memory 2Gi   --container-limits-memory 2Gi 
+        #     $HAL_COMMAND config deploy component-sizing orca                     edit --replicas 2 --container-requests-cpu 250m --container-limits-cpu 250m --container-requests-memory 1Gi   --container-limits-memory 1Gi  
+        #     $HAL_COMMAND config deploy component-sizing rosco                    edit --replicas 2 --container-requests-cpu 100m --container-limits-cpu 100m --container-requests-memory 768Mi --container-limits-memory 768Mi            
+        #     $HAL_COMMAND config deploy component-sizing fiat                     edit --replicas 1 --container-requests-cpu 100m --container-limits-cpu 100m --container-requests-memory 500Mi --container-limits-memory 500Mi
+        #     $HAL_COMMAND config deploy component-sizing front50                  edit --replicas 2 --container-requests-cpu 150m --container-limits-cpu 150m --container-requests-memory 1Gi   --container-limits-memory 1Gi  
+        # elif [ $ECHO_HA_WORK -eq 2 ]; then
+        #     echo ' no work resource '
+        # fi           
+        # $HAL_COMMAND deploy apply --delete-orphaned-services 
 
+        # # # Ha Work After Pod Organize
+        # # if [ $CLOUD_DRIVER_WORK -eq 1 ]; then  
+        # #     $HAL_COMMAND deploy apply --delete-orphaned-services 
+        # # elif [ $CLOUD_DRIVER_WORK -eq 2 ]; then
+        # #     $HAL_COMMAND deploy apply --delete-orphaned-services
+        # # elif [ $CLOUD_DRIVER_WORK -eq 3 ]; then
+        # #     echo ' not apply orphaned service '
+        # # fi       
+        # #### spinnaker HA END   ####
 
+        # ### end CJB
+    
+        # $HAL_COMMAND config provider aws enable
+        # $HAL_COMMAND config storage s3 edit --path-style-access=true
+
+        # # sleep 3600
+
+        # #### User Data Files
+        # HOME_USER_DATA="/home/spinnaker/.hal/default/profiles/clouddriver/udf"
+        # TARGET_POD="spinnaker-spinnaker-halyard-0"
+        # kubectl exec -it $TARGET_POD -- /bin/bash -c "mkdir -p $HOME_USER_DATA"
+        # cat >/tmp/udf0 <<EOF
+        # #!/bin/bash
+        # cat >/etc/default/server-env <<EOL
+        # CLOUD_ACCOUNT="%%account%%"
+        # CLOUD_ACCOUNT_TYPE="%%accounttype%%"
+        # CLOUD_ENVIRONMENT="%%env%%"
+        # CLOUD_SERVER_GROUP="%%group%%"
+        # CLOUD_CLUSTER="%%cluster%%"
+        # CLOUD_STACK="%%stack%%"
+        # CLOUD_DETAIL="%%detail%%"
+        # EC2_REGION="%%region%%"
+        # LAUNCH_CONFIG="%%launchconfig%%"
+        # EOL
+        # EOF
+        # kubectl cp /tmp/udf0 $TARGET_POD:$HOME_USER_DATA/udf0
+
+        # #### integrate Kayenta
+        # $HAL_COMMAND config canary enable
+        
+        # $HAL_COMMAND canary prometheus enable 
+        # $HAL_COMMAND config canary prometheus account add my-prometheus --base-url
+
+        # $HAL_COMMAND config canary aws enable 
+        # $HAL_COMMAND config canary aws account add my-kayenta-s3 --bucket s3-spinnaker-artifacts-jackchun --region ap-northeast-2 --assume-role arn:aws:iam::481230465846:role/spinnaker-s3
+        # $HAL_COMMAND config canary aws edit --s3-enabled=true
+
+        # $HAL_COMMAND config provider kubernetes enable
+        # $HAL_COMMAND config provider kuberrnetes account add spin-cluster-account --context arn:aws:eks:ap-northeast-2:481230465846:cluster/jackchun-eks-FeNV
 
   additionalSecrets:
     create: false
@@ -78,22 +201,22 @@ halyard:
       #        - spinnaker-admin
       #     executeFallback: 'WRITE'
       
-      ### CJB
-      spinnakerconfig.yml: 
-        spring:
-          profiles:
-            include: vault
-          cloud:
-            config:
-              server:
-                vault:
-                  host: 15.165.41.118
-                  port: 10200
-                  backend: spinnaker/clouddriver/*
-                  kvVersion: 2
-                  scheme: http
-                  defaultKey: jackchun-eks-pWjV
-                  token: ${VAULT_TOKEN}
+      # ### CJB
+      # spinnakerconfig.yml: 
+      #   spring:
+      #     profiles:
+      #       include: vault
+      #     cloud:
+      #       config:
+      #         server:
+      #           vault:
+      #             host: 15.165.41.118
+      #             port: 10200
+      #             backend: spinnaker
+      #             kvVersion: 2
+      #             scheme: http
+      #             defaultKey: clouddriver
+      #             token: ${VAULT_TOKEN}
         
   ## Define custom settings for Spinnaker services. Read more for details:
   ## https://www.spinnaker.io/reference/halyard/custom/#custom-service-settings
