@@ -89,7 +89,7 @@ halyard:
                 vault:
                   host: 15.165.41.118
                   port: 10200
-                  backend: spinnaker/clouddriver
+                  backend: spinnaker/clouddriver/*
                   kvVersion: 2
                   scheme: http
                   defaultKey: jackchun-eks-pWjV
