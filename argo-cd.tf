@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "argocd-ns" {
     labels = {
       role = "argocd"
     }
-    name = argocd
+    name = "argocd"
   }
 }
 
@@ -17,5 +17,5 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart = "argo/argo-cd"
   version = "4.5.0"
-  
+
 }
