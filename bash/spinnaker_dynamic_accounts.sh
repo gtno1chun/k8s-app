@@ -13,34 +13,28 @@ if [ ! -f $PWD/config ]; then
  cp -f $KUBECONFIG_FILE $PWD/.
 fi
 
-TOKEN="eyJhbGciOiJSUzI1NiIsImtpZCI6Inh2ZmJjUG1fR0NWWjVQNkhqc3hXbUstTDhsSlRuc1piSzZEZmw3ekdaTUEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJzcGlubmFrZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoic3Bpbm5ha2VyLXNlcnZpY2UtYWNjb3VudC10b2tlbi13bnFscCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJzcGlubmFrZXItc2VydmljZS1hY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiOGJhNzAxNzAtNmJjYi00OGRkLTgxNzMtNDE0YjRkOWI2MmY5Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnNwaW5uYWtlcjpzcGlubmFrZXItc2VydmljZS1hY2NvdW50In0.V1kQlLyL2N1g0PSGnICNnhi2iifxBV5EHO2-M05h1M3gQmh4-WgotGn2_vGd58Cr86Rtib39rUZyRrsNhT7OGjoMUZielzOvHl0DsOKerS2evzxkk6XgefAXoh-foH83AU1WNhUjC7q0k68GnHXiT_FcWcLHsl9tc9tGVZrywb4UPBBd5zt3ROmHvV9Sp7KAHqV3UiDAvTiY1GoWfM-bCq0tPg-NlZoBg3Cee8mPGT9WjfpmEFdJhGarMGwJ7rx4EyDFBQnBZsyRAkUTOJ1TFnYcRGRN2LE91vFGL_mfPcFJLJcEhOA7GZqnxD02Ck3y2oQB_OD4B9jZoVziN3FsZA"
-
-
 ## VARIABLE 
 function config_variable() {
   get_contexts=`kubectl config get-contexts | wc -l`
   count_cluster=$( seq 1 $(expr $get_contexts - 1) )
 }
 
-
 ## Apply Secret Token
 function apply_secret_token() {
+  config_variable
   # EXIT_CODE=0
-
-
   #SECRET=$(kubectl --kubeconfig=config -n spinnaker get serviceaccount spinnaker-service-account -o jsonpath='{.secrets[0].name}')
-  #TOKEN=$(kubectl --kubeconfig=config -n spinnaker get secret $SECRET -o jsonpath='{.data.token}' | base64 --decode)
-  TOKEN="eyJhbGciOiJSUzI1NiIsImtpZCI6Inh2ZmJjUG1fR0NWWjVQNkhqc3hXbUstTDhsSlRuc1piSzZEZmw3ekdaTUEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJzcGlubmFrZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoic3Bpbm5ha2VyLXNlcnZpY2UtYWNjb3VudC10b2tlbi13bnFscCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJzcGlubmFrZXItc2VydmljZS1hY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiOGJhNzAxNzAtNmJjYi00OGRkLTgxNzMtNDE0YjRkOWI2MmY5Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OnNwaW5uYWtlcjpzcGlubmFrZXItc2VydmljZS1hY2NvdW50In0.V1kQlLyL2N1g0PSGnICNnhi2iifxBV5EHO2-M05h1M3gQmh4-WgotGn2_vGd58Cr86Rtib39rUZyRrsNhT7OGjoMUZielzOvHl0DsOKerS2evzxkk6XgefAXoh-foH83AU1WNhUjC7q0k68GnHXiT_FcWcLHsl9tc9tGVZrywb4UPBBd5zt3ROmHvV9Sp7KAHqV3UiDAvTiY1GoWfM-bCq0tPg-NlZoBg3Cee8mPGT9WjfpmEFdJhGarMGwJ7rx4EyDFBQnBZsyRAkUTOJ1TFnYcRGRN2LE91vFGL_mfPcFJLJcEhOA7GZqnxD02Ck3y2oQB_OD4B9jZoVziN3FsZA"
+  TOKEN=$(kubectl --kubeconfig=config -n spinnaker get secrets $(kubectl -n spinnaker get serviceaccounts spinnaker-service-account -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 --decode)
+  echo $TOKEN
 
   for i in $count_cluster
   do
     cluster_name=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" )
     k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' )
+    echo $cluster_name
     kubectl --kubeconfig=config config set-credentials $cluster_name-token-user --token $TOKEN
     kubectl --kubeconfig=config config set-context $cluster_name --user $cluster_name-token-user
   done
-
-
 }
 apply_secret_token
 
@@ -80,7 +74,6 @@ function create_k8s_config() {
 
 }
 create_k8s_config
-
 
 
 ## CRATE kubeconfig_[$name].yml
@@ -148,5 +141,3 @@ function vault_put() {
 
 }
 vault_put
-
-
