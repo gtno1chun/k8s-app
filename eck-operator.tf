@@ -56,4 +56,12 @@ resource "helm_release" "apm-server" {
   version       = "7.17.1"
 
 }
+resource "helm_release" "metricbeat" {
+  depends_on = [kubernetes_namespace.elastic_ns]
+  name          = "metricbeat"
+  namespace     = kubernetes_namespace.elastic_ns.metadata[0].name
+  repository    = "https://helm.elastic.co"
+  chart         = "metricbeat"
+  version       = "7.17.1"
 
+}
