@@ -12,6 +12,7 @@
 #   oidc_url                                   = aws_iam_openid_connect_provider.openid_connect.url
 # }
 locals {
+  iam-ebs-csi-driver = aws_iam_role.amazoneks_ebs_csi_driver_role
 
 }
 
@@ -36,7 +37,7 @@ resource "helm_release" "ebs_csi_controller" {
   }
   set {
     name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = "arn:aws:iam::481230465846:role/AmazonEKS_EBS_CSI_DriverRole"
+    value = "arn:aws:iam::481230465846:role/${local.iam-ebs-csi-driver}"
   }
 
 #   set {
