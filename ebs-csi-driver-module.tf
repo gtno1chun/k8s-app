@@ -32,18 +32,24 @@ resource "helm_release" "ebs_csi_controller" {
     value = "arn:aws:iam::481230465846:role/AmazonEKS_EBS_CSI_DriverRole"
   }
 
-  values = [
-    file("./helm/values/default-affinity-node.yaml"),
-    <<-VALUES
-storageClasses:
-  - name: gp3
-    annotations:
-      storageclass.kubernetes.io/is-default-class: "true"
-    labels:
-      managedby: k8s-terraform
-    volumeBindingMode: WaitForFirstConsumer
-    reclaimPolicy: Delete
-  VALUES
-  ]
-  
+#   set {
+#     name  = "storageClasses"
+#     value = ""
+
+#   }
+
+#   values = [
+#     file("./helm/values/default-affinity-node.yaml"),
+#     <<-VALUES
+# storageClasses:
+#   - name: gp3
+#     annotations:
+#       storageclass.kubernetes.io/is-default-class: "true"
+#     labels:
+#       managedby: k8s-terraform
+#     volumeBindingMode: WaitForFirstConsumer
+#     reclaimPolicy: Delete
+#   VALUES
+#   ]
+
 }
