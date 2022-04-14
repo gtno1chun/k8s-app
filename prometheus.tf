@@ -29,6 +29,15 @@ resource "helm_release" "prometheus" {
     file("./helm/charts/kube-prometheus-stack/values.yaml")
   ]
 
+  set {
+    name  = "metrics.enabled"
+    value = true
+  }
+  set {
+    name  = "metrics.serviceMonitor.enabled"
+    value = true
+  }
+
   # ## volume.beta.kubernetes.io/storage-provisioner: ebs.csi.aws.com
   # set {
   #   name  = "volume.beta.kubernetes.io/storage-provisioner"
