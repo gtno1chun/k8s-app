@@ -22,6 +22,10 @@ resource "helm_release" "ebs_csi_controller" {
   version     = "2.6.1"
   repository  = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
 
+  values = [ 
+    file("./helm/charts/aws-ebs-csi-driver/values.yaml")
+  ]
+
   set {
     name  = "nameOverride"
     value = "ebs-csi-controller" 

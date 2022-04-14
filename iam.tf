@@ -191,7 +191,7 @@ resource "aws_iam_role_policy_attachment" "amazoneks_ebs_csi_driver_role_policy_
   policy_arn  = aws_iam_policy.amazoneks_ebs_csi_driver_policy.arn
 } 
 
-
+/*
 ##############################
 ##### Cluster Autoscaler #####
 ##############################
@@ -257,3 +257,4 @@ resource "aws_iam_role_policy_attachment" "amazoneks_cluster_autoscaler_role_pol
   role        = aws_iam_role.amazoneks_cluster_autoscaler_role.name
   policy_arn  = aws_iam_policy.amazoneks_cluster_autoscaler_policy.arn 
 }
+*/
