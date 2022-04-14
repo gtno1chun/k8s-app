@@ -191,7 +191,7 @@ resource "aws_iam_role_policy_attachment" "amazoneks_ebs_csi_driver_role_policy_
   policy_arn  = aws_iam_policy.amazoneks_ebs_csi_driver_policy.arn
 } 
 
-/*
+
 ##############################
 ##### Cluster Autoscaler #####
 ##############################
@@ -234,22 +234,31 @@ resource "aws_iam_policy" "amazoneks_cluster_autoscaler_policy" {
 
   policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeAutoScalingInstances",
-                "autoscaling:DescribeLaunchConfigurations",
-                "autoscaling:DescribeTags",
-                "autoscaling:SetDesiredCapacity",
-                "autoscaling:TerminateInstanceInAutoScalingGroup",
-                "ec2:DescribeLaunchTemplateVersions"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeTags",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeLaunchTemplateVersions"
+      ],
+      "Resource": ["*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "ec2:DescribeInstanceTypes",
+        "eks:DescribeNodegroup"
+      ],
+      "Resource": ["*"]
+    }
+  ]
 }
 EOF
 }
@@ -257,4 +266,4 @@ resource "aws_iam_role_policy_attachment" "amazoneks_cluster_autoscaler_role_pol
   role        = aws_iam_role.amazoneks_cluster_autoscaler_role.name
   policy_arn  = aws_iam_policy.amazoneks_cluster_autoscaler_policy.arn 
 }
-*/
+
