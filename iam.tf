@@ -1,4 +1,3 @@
-/*
 ###########################
 ###### EBS CSI Driver #####
 ###########################
@@ -191,7 +190,6 @@ resource "aws_iam_role_policy_attachment" "amazoneks_ebs_csi_driver_role_policy_
   role        = aws_iam_role.amazoneks_ebs_csi_driver_role.name
   policy_arn  = aws_iam_policy.amazoneks_ebs_csi_driver_policy.arn
 } 
-*/
 
 
 ##############################
