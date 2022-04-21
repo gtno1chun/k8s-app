@@ -1,7 +1,3 @@
-output "test_output" {
-  description   = "test output"
-  value         = "TEST OUTPUT"
-}
 
 # output "kubernetes_host" {
 #   description  = "k8s eks host" 

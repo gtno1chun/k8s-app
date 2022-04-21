@@ -89,10 +89,10 @@ halyard:
                 vault:
                   host: 15.165.41.118
                   port: 10200
-                  backend: spinnaker/clouddriver/*
+                  backend: spinnaker
                   kvVersion: 2
                   scheme: http
-                  defaultKey: jackchun-eks-pWjV
+                  defaultKey: clouddriver
                   token: ${VAULT_TOKEN}
         
   ## Define custom settings for Spinnaker services. Read more for details:

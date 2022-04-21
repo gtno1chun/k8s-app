@@ -10,15 +10,33 @@ delete_out
 KUBECONFIG_FILE=$HOME/.kube/config
 
 if [ ! -f $PWD/config ]; then
-  cp -f $KUBECONFIG_FILE $PWD/.
+ cp -f $KUBECONFIG_FILE $PWD/.
 fi
-
 
 ## VARIABLE 
 function config_variable() {
   get_contexts=`kubectl config get-contexts | wc -l`
   count_cluster=$( seq 1 $(expr $get_contexts - 1) )
 }
+
+## Apply Secret Token
+function apply_secret_token() {
+  config_variable
+  # EXIT_CODE=0
+  #SECRET=$(kubectl --kubeconfig=config -n spinnaker get serviceaccount spinnaker-service-account -o jsonpath='{.secrets[0].name}')
+  TOKEN=$(kubectl --kubeconfig=config -n spinnaker get secrets $(kubectl -n spinnaker get serviceaccounts spinnaker-service-account -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 --decode)
+  echo $TOKEN
+
+  for i in $count_cluster
+  do
+    cluster_name=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" )
+    k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' )
+    echo $cluster_name
+    kubectl --kubeconfig=config config set-credentials $cluster_name-token-user --token $TOKEN
+    kubectl --kubeconfig=config config set-context $cluster_name --user $cluster_name-token-user
+  done
+}
+apply_secret_token
 
 
 ## CREATE k8s config
@@ -30,6 +48,9 @@ function create_k8s_config() {
     cluster_name=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" )
     k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' ) 
     cp $PWD/config $PWD/config_$k8s_configs
+    kubectl --kubeconfig=config_$k8s_configs config set-credentials $cluster_name-token-user --token $TOKEN
+    kubectl --kubeconfig=config_$k8s_configs config set-context $cluster_name --user ${cluster_name}-token-user
+    
 
     for j in $count_cluster
     do
@@ -54,6 +75,7 @@ function create_k8s_config() {
 }
 create_k8s_config
 
+
 ## CRATE kubeconfig_[$name].yml
 function create_kubeconfig_json() {
   config_variable
@@ -67,7 +89,8 @@ EOF
   do
     #cluster_name=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" )
     k8s_configs=$( kubectl config view --kubeconfig=config -o jsonpath='{.contexts[*].name}' | awk -F" " '{print $ct}' ct="$i" | awk -F"/" '{print $2}' )
-    echo $k8s_configs
+    #echo $k8s_configs
+    
     kubeconfig=$( cat $PWD/config_$k8s_configs | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' )
 
     cat << EOF >> $PWD/kubeconfig_all_clusters.yml
@@ -118,5 +141,3 @@ function vault_put() {
 
 }
 vault_put
-
-
