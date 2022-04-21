@@ -20,6 +20,8 @@ locals {
 
 resource "helm_release" "cluster-autoscaler" {
 
+  depends_on = [ helm_release.prometheus ]
+
   name      = "cluster-autoscaler"
   namespace = "kube-system"
   chart     = "cluster-autoscaler"
