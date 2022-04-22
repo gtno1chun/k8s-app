@@ -13,7 +13,7 @@ resource "kubernetes_namespace" "n8n_ns" {
 resource "helm_release" "n8s" {
   depends_on = [kubernetes_namespace.n8n_ns]
 
-  name          = "argo-cd"
+  name          = "n8n"
   namespace     = kubernetes_namespace.n8n_ns.metadata[0].name
   repository    = "https://helm.linogics.io"
   chart         = "linogics/n8n"
