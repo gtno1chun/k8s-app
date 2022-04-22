@@ -32,4 +32,4 @@ resource "helm_release" "n8s" {
     value = "mongodb://user:password@localhost:27017/database"
   }
 
-}
+} 
