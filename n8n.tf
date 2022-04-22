@@ -19,4 +19,17 @@ resource "helm_release" "n8s" {
   chart         = "n8n"
   version       = "0.5.0"
 
+  values = [ 
+    file("./helm/charts/n8n/values.yaml")
+  ]
+
+  set {
+    name  = "database.type"
+    value = "mongodb"
+  }
+  set {
+    name  = "database.mongodb"
+    value = "mongodb://user:password@localhost:27017/database"
+  }
+
 }
