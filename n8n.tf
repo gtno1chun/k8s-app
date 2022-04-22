@@ -15,8 +15,8 @@ resource "helm_release" "n8s" {
 
   name          = "argo-cd"
   namespace     = kubernetes_namespace.n8n_ns.metadata[0].name
-  repository    = "https://helm.linogics.io"
-  chart         = "linogics"
+  repository    = "https://helm.linogics.io/linogics"
+  chart         = "n8n"
   version       = "0.136.0"
 
 }
