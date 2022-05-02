@@ -38,7 +38,6 @@ resource "aws_s3_bucket" "s3_artifacts" {
 #   }
 # }
 
-/*
 resource "kubernetes_namespace" "spinnaker_stable" {
   metadata {
     annotations = {
@@ -96,4 +95,4 @@ resource "kubernetes_default_service_account" "spinnaker-default-sa" {
   #   name = "${kubernetes_secret.spinnaker-secret.metadata.0.name}"
   # }
 }
-*/
+
