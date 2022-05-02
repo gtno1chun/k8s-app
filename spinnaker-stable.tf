@@ -51,7 +51,6 @@ resource "kubernetes_namespace" "spinnaker_stable" {
   }
 }
 
-/*
 resource "helm_release" "spinnaker_stable" {
   depends_on    = [
     kubernetes_namespace.spinnaker_stable, 
@@ -86,6 +85,7 @@ resource "helm_release" "spinnaker_stable" {
 
 }
 
+/*
 resource "kubernetes_default_service_account" "spinnaker-default-sa" {
   metadata {
     annotations = {
