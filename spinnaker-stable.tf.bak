@@ -9,6 +9,7 @@ locals {
   # spinnaker_stable_s3_assumRole = "arn:aws:iam::481230465846:role/VaultCloud-Role" 
 }
 
+
 ## 2022/02/08
 resource "aws_s3_bucket" "s3_artifacts" {
   bucket = "s3-spinnaker-artifact"
@@ -37,6 +38,7 @@ resource "aws_s3_bucket" "s3_artifacts" {
 #     developer = "vaultcloud-user"
 #   }
 # }
+
 
 resource "kubernetes_namespace" "spinnaker_stable" {
   metadata {
