@@ -94,6 +94,18 @@ halyard:
                   scheme: http
                   defaultKey: clouddriver
                   token: ${VAULT_TOKEN}
+      
+      # logback TEST
+      spinnaker-local.yaml:
+        logging:
+          level:
+            # Enable debug logging by changing level to DEBUG
+            root: INFO  # default
+
+            # Example setting per class log level output
+            # Disable logging out `Evaluated 27 expression(s) - ({ json file })
+            # com.netflix.spinnaker.orca.pipeline.util.ContextParameterProcessor: WARN
+
         
   ## Define custom settings for Spinnaker services. Read more for details:
   ## https://www.spinnaker.io/reference/halyard/custom/#custom-service-settings
