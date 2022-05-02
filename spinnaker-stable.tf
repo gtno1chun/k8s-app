@@ -39,7 +39,6 @@ resource "aws_s3_bucket" "s3_artifacts" {
 #   }
 # }
 
-/*
 resource "kubernetes_namespace" "spinnaker_stable" {
   metadata {
     annotations = {
@@ -52,6 +51,7 @@ resource "kubernetes_namespace" "spinnaker_stable" {
   }
 }
 
+/*
 resource "helm_release" "spinnaker_stable" {
   depends_on    = [
     kubernetes_namespace.spinnaker_stable, 
