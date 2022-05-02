@@ -10,6 +10,7 @@ halyard:
     enabled: true
   # Uncomment to add storage class for the persistence data volume
   # storageClass: <storageclass_name>
+  storageClass: ${storageclass_name}
   # Provide additional parameters to halyard deploy apply command
   additionalInstallParameters: []
   # Provide a config map with Hal commands that will be run the core config (storage)
@@ -95,16 +96,16 @@ halyard:
                   defaultKey: clouddriver
                   token: ${VAULT_TOKEN}
       
-      # logback TEST
-      spinnaker-local.yaml:
-        logging:
-          level:
-            # Enable debug logging by changing level to DEBUG
-            root: INFO  # default
+      # # logback TEST
+      # spinnaker-local.yaml:
+      #   logging:
+      #   level:
+      #     # Enable debug logging by changing level to DEBUG
+      #     root: INFO  # default
 
-            # Example setting per class log level output
-            # Disable logging out `Evaluated 27 expression(s) - ({ json file })
-            # com.netflix.spinnaker.orca.pipeline.util.ContextParameterProcessor: WARN
+      #     # Example setting per class log level output
+      #     # Disable logging out `Evaluated 27 expression(s) - ({ json file })
+      #     # com.netflix.spinnaker.orca.pipeline.util.ContextParameterProcessor: WARN
 
         
   ## Define custom settings for Spinnaker services. Read more for details:
