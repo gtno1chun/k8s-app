@@ -39,17 +39,17 @@ resource "aws_s3_bucket" "s3_artifacts" {
 #   }
 # }
 
-resource "kubernetes_namespace" "spinnaker_stable" {
-  metadata {
-    annotations = {
-      name = "spinnaker"
-    }
-    labels = {
-      role = "spinnaker"
-    }
-    name = local.spinnaker_stable_ns
-  }
-}
+# resource "kubernetes_namespace" "spinnaker_stable" {
+#   metadata {
+#     annotations = {
+#       name = "spinnaker"
+#     }
+#     labels = {
+#       role = "spinnaker"
+#     }
+#     name = local.spinnaker_stable_ns
+#   }
+# }
 
 # resource "helm_release" "spinnaker_stable" {
 #   depends_on    = [
