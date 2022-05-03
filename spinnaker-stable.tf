@@ -58,7 +58,8 @@ resource "helm_release" "spinnaker_stable" {
   ]
   name          = "spinnaker"
   namespace     = local.spinnaker_stable_ns 
-  repository    = "https://helmcharts.opsmx.com/"
+  # repository    = "https://helmcharts.opsmx.com/"
+  repository    = "./helm/charts"
   chart         = "spinnaker" 
   recreate_pods = true 
 
