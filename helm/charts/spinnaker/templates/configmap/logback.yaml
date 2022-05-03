@@ -9,19 +9,13 @@ data:
   logback.xml: |
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
-      <appender name="CONSOLE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>%i.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-          <fileNamePattern>%i.{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-          <maxFileSize>1MB</maxFileSize>    
-          <maxHistory>60</maxHistory>
-          <totalSizeCap>1GB</totalSizeCap>
-        </rollingPolicy>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Default is JSON - https://github.com/logstash/logstash-logback-encoder#data-format -->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-      </appender>  
+      </appender>
 
-      <root level="DEBUG">
+      <!-- Enable debug logging by changing level to DEBUG -->
+      <root level="INFO">
         <appender-ref ref="CONSOLE" />
       </root>
-
     </configuration>
