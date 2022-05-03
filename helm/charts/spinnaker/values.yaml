@@ -107,6 +107,7 @@ halyard:
             # Example setting per class log level output
             # Disable logging out `Evaluated 27 expression(s) - ({ json file })
             # com.netflix.spinnaker.orca.pipeline.util.ContextParameterProcessor: WARN
+          config: /opt/spinnaker/config/logback.xml
 
         
   ## Define custom settings for Spinnaker services. Read more for details:
