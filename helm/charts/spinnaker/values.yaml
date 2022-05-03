@@ -101,7 +101,8 @@ halyard:
         logging:
           level:
             # Enable debug logging by changing level to DEBUG
-            root: INFO  # default
+            #root: INFO  # default
+            root: DEBUG
 
             # Example setting per class log level output
             # Disable logging out `Evaluated 27 expression(s) - ({ json file })
