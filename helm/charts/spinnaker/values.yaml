@@ -67,37 +67,6 @@ halyard:
           enabled: true
           udfRoot: /opt/clouddriver/config/udf
           defaultLegacyUdf: true
-        data:
-          logback.xml: |
-            <?xml version="1.0" encoding="UTF-8"?>
-            <configuration>
-              <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-                <!-- Default is JSON - https://github.com/logstash/logstash-logback-encoder#data-format -->
-                <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-              </appender>
-
-              <!-- Enable debug logging by changing level to DEBUG -->
-              <root level="INFO">
-                <appender-ref ref="CONSOLE" />
-              </root>
-            </configuration>
-      
-      orca-local.yml:
-        data:
-          logback.xml: |
-            <?xml version="1.0" encoding="UTF-8"?>
-            <configuration>
-              <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-                <!-- Default is JSON - https://github.com/logstash/logstash-logback-encoder#data-format -->
-                <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-              </appender>
-
-              <!-- Enable debug logging by changing level to DEBUG -->
-              <root level="INFO">
-                <appender-ref ref="CONSOLE" />
-              </root>
-            </configuration>
-
       
       # fiat-local.yml:
       #   fiat:
