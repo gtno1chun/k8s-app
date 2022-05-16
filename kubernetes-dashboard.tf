@@ -11,7 +11,7 @@ resource "kubernetes_namespace" "k8s_dashboard_ns" {
 }
 
 resource "helm_release" "k8s-dashboard" {
-  depends_on = [ kubernetes_namespace.k8s_dashboard_ns.name ]
+  depends_on = [ kubernetes_namespace.k8s_dashboard_ns.name, ]
 
   name        = "kubernetes-dashboard" 
   namespace   = kubernetes_namespace.k8s_dashboard_ns.name
