@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "s3_artifacts" {
   bucket = "s3-spinnaker-artifact"
   acl    = "public-read-write"
   versioning {
-    enabled = false
+    enabled = true
   }
   tags = {
     Name = "s3-spinnaker-artifact"
@@ -29,7 +29,7 @@ resource "aws_s3_bucket" "s3_artifacts" {
 #   bucket  = "s3-spinnaker-storage-jackchun"  
 #   acl     = "public-read-write"
 #   versioning {
-#     enabled = false
+#     enabled = true
 #   }
 #   tags = {
 #     Name = "s3-spinnaker-storage-jackchun"
