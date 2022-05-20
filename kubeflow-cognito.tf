@@ -10,10 +10,10 @@ resource "kustomization_resource" "test" {
 }
 
 output test-provider {
-  value = kustomization_resource.test.for_each
+  value = data.kustomization.test.id
 
 }
-output "test-manifest" {
-  value = kustomization_resource.test.manifest
-} 
+# output "test-manifest" {
+#   value = kustomization_resource.test.manifest
+# } 
   
