@@ -49,7 +49,7 @@ provider "vault" {
   # address = var.vault_endpoint
   address = data.terraform_remote_state.cluster.outputs.vault_endpoint 
   auth_login {
-    path = format("auth/userpass/login/%s", var.username_vault)
+    path = format("auth/userpass/login/%s", data.terraform_remote_state.cluster.outputs.vault_username)
     parameters = {
       # username = var.username_vault
       # password = var.password_vault 
