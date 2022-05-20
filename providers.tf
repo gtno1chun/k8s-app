@@ -41,9 +41,23 @@ provider "helm" {
   }
 }
 
+# provider "vault" {
+#   address   = var.vault_endpoint
+# }
+
 provider "vault" {
-  address   = var.vault_endpoint
-}
+  # address = var.vault_endpoint
+  address = data.terraform_remote_state.cluster.output.vault_endpoint 
+  auth_login {
+    path = format("auth/userpass/login/%s", var.username_vault)
+    parameters = {
+      # username = var.username_vault
+      # password = var.password_vault 
+      username = data.terraform_remote_state.cluster.output.vault_username
+      password = data.terraform_remote_state.cluster.output.vault_password 
+    }
+  }
+} 
 
 data "vault_aws_access_credentials" "vault-assume" {
   backend = "aws"
