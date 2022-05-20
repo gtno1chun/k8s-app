@@ -1,3 +1,5 @@
+provider "kustomization" {}
+
 data "kustomization" "test" {
   provider = kustomization
   path = "test_kustomization/basic/initial"
