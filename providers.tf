@@ -83,7 +83,7 @@ provider "aws" {
 terraform {
   required_providers {
     kustomization = {
-      source  = "kbst/kustomize"
+      source  = "kbst/kustomization"
       version = "v0.2.0-beta.3"
     }
   }
