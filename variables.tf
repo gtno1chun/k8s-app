@@ -10,11 +10,11 @@ variable "cluster_workspace" {
 #   default     = "aws secret key"
 # }
 
-variable "vault_endpoint" {
-  default = ""
-}
+# variable "vault_endpoint" {
+#   default = ""
+# }
 
-variable "VAULT_TOKEN" {
-  description = "vault access Token : https://registry.terraform.io/providers/hashicorp/vault/latest/docs#token" 
-  sensitive   = true 
-} 
+# variable "VAULT_TOKEN" {
+#   description = "vault access Token : https://registry.terraform.io/providers/hashicorp/vault/latest/docs#token" 
+#   sensitive   = true 
+# } 
