@@ -20,8 +20,8 @@ terraform {
       version = ">= 2.1"
     }
     kustomization = {
-      source  = "kbst/kustomize"
-      version = "v0.2.0-beta.3"
+      source  = "kbst/kustomization"
+      # version = "v0.2.0-beta.3"
     }
     
   }
