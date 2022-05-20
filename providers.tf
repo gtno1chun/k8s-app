@@ -79,4 +79,6 @@ provider "aws" {
   token      = data.vault_aws_access_credentials.vault-assume.security_token
 }
 
-provider "kustomization" {}
+provider "kustomization" {
+
+}
