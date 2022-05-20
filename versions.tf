@@ -19,5 +19,10 @@ terraform {
       source  = "hashicorp/random"
       version = ">= 2.1"
     }
+    kustomization = {
+      source  = "kbst/kustomization"
+      version = "v0.2.0-beta.3"
+    }
+    
   }
-} 
+}

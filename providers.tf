@@ -72,7 +72,6 @@ data "vault_aws_access_credentials" "vault-assume" {
 #   type    = "sts"
 # }
 
-
 provider "aws" {
   region     = "ap-northeast-2"
   access_key = data.vault_aws_access_credentials.vault-assume.access_key
@@ -80,13 +79,4 @@ provider "aws" {
   token      = data.vault_aws_access_credentials.vault-assume.security_token
 }
 
-terraform {
-  required_providers {
-    kustomization = {
-      source  = "kbst/kustomization"
-      version = "v0.2.0-beta.3"
-    }
-  }
-  required_version = ">= 0.12"
-}
 provider "kustomization" {}
