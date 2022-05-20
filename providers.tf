@@ -79,3 +79,14 @@ provider "aws" {
   secret_key = data.vault_aws_access_credentials.vault-assume.secret_key
   token      = data.vault_aws_access_credentials.vault-assume.security_token
 }
+
+terraform {
+  required_providers {
+    kustomization = {
+      source  = "kbst/kustomize"
+      version = "v0.2.0-beta.3"
+    }
+  }
+  required_version = ">= 0.12"
+}
+provider "kustomization" {}
