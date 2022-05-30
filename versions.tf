@@ -19,5 +19,6 @@ terraform {
       source  = "hashicorp/random"
       version = ">= 2.1"
     }
+    
   }
-} 
+}

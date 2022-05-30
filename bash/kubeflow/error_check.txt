@@ -1,0 +1,61 @@
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+│                node.kubernetes.io/unreachable:NoExecute for 300s
+
+
+
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.istio.networking.internal.knative.dev": Post "https://istio-webhook.knative-serving.svc:443/config-validation?timeout=30s": no endpoints available for service "istio-webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.istio.networking.internal.knative.dev": Post "https://istio-webhook.knative-serving.svc:443/config-validation?timeout=30s": no endpoints available for service "istio-webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "config.webhook.serving.knative.dev": Post "https://webhook.knative-serving.svc:443/config-validation?timeout=10s": no endpoints available for service "webhook"
+
+
+MountVolume.SetUp failed for volume "istiod-ca-cert" : configmap "istio-ca-root-cert" not found
+
+
+error when creating configmap istio-ca-root-cert: Internal error occurred: failed calling webhook
+
+klog    admissionregistration.k8s.io/v1beta1 MutatingWebhookConfiguration is deprecated in v1.16+, unavailable in v1.22+; use admissionregistration.k8s.io/v1 MutatingWebhookConfiguration
+klog    networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+klog    networking.k8s.io/v1beta1 IngressClass is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 IngressClassList
+
+
+error: unable to recognize "STDIN": no matches for kind "Image" in version "caching.internal.knative.dev/v1alpha1"
+
+Error: map[string]interface {}{"namespace":"kubeflow"} is expected to contain a name field
+
+error: unable to recognize "STDIN": no matches for kind "Profile" in version "kubeflow.org/v1beta1"
+rbac.authorization.k8s.io/v1beta1 ClusterRole is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRole
+ admissionregistration.k8s.io/v1beta1 MutatingWebhookConfiguration is deprecated in v1.16+, unavailable in v1.22+; use admissionregistration.k8s.io/v1 MutatingWebhookConfiguration
+Warning: apiextensions.k8s.io/v1beta1 CustomResourceDefinition is deprecated in v1.16+, unavailable in v1.22+; use apiextensions.k8s.io/v1 CustomResourceDefinition
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRole is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRole
+Warning: rbac.authorization.k8s.io/v1beta1 ClusterRoleBinding is deprecated in v1.17+, unavailable in v1.22+; use rbac.authorization.k8s.io/v1 ClusterRoleBinding
+
+
+grep -rl networking.k8s.io/v1beta1 | xargs sed -i 's/networking.k8s.io\/v1beta1/networking.k8s.io\/v1/g'
+grep -rl admissionregistration.k8s.io/v1beta1 | xargs sed -i 's/admissionregistration.k8s.io\/v1beta1/admissionregistration.k8s.io\/v1/g'
+
+grep -rl apiextensions.k8s.io/v1beta1 | xargs sed -i 's/apiextensions.k8s.io\/v1beta1/apiextensions.k8s.io\/v1/g' 
+grep -rl rbac.authorization.k8s.io/v1beta1 | xargs sed -i 's/rbac.authorization.k8s.io\/v1beta1/rbac.authorization.k8s.io\/v1/g'
+
+
+
+
+  tolerations:
+│   - effect: NoExecute
+│     key: node.kubernetes.io/not-ready
+│     operator: Exists
+│     tolerationSeconds: 300
+
+
+│   - effect: NoExecute
+│     key: node.kubernetes.io/unreachable
+│     operator: Exists
+│     tolerationSeconds: 300
