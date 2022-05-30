@@ -119,7 +119,7 @@ kf_components=("cert-manager" "istio" "dex" "oidc" "knative")
     ## aws telemetry
     kustomize build awsconfigs/common/aws-telemetry | kubectl --kubeconfig=$KUBECONFIG $2 -f -
 
-    cd $$KF_manifest
+    cd $KF_manifest
     ## user namespace
     kustomize build common/user-namespace/base | kubectl --kubeconfig=$KUBECONFIG $2 -f -
   fi
