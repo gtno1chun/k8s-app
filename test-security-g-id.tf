@@ -9,11 +9,19 @@
   
 # }
 
+# data "aws_security_groups" "test" {
+#   tags = {
+#     Name = "eks-cluster-sg-jackchun-eks-oazw-1444394879"
+#   }
+# }
+
 data "aws_security_groups" "test" {
-  tags = {
-    Name = "eks-cluster-sg-jackchun-eks-oazw-1444394879"
+  filter {
+    name = "group-name"
+    values = ["*Ubuntu*"]
   }
 }
+
 
 output "security_group_id" {
   description = "sgr-id"
