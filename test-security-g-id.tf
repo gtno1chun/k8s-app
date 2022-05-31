@@ -20,9 +20,9 @@ output "security_group_id" {
   value = data.aws_security_groups.test.id
   
 }
-output "security_group_arn" {
+output "security_group_arns" {
   description = "sgr-id"
-  value = data.aws_security_groups.test.arn
+  value = data.aws_security_groups.test.arns
   
 }
 output "security_group_ids" {
