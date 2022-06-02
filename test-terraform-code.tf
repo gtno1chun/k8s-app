@@ -46,7 +46,7 @@
 
 
 variable "roles" {
-  type = map(list)
+  #type = map(list(string))
   default = {
     dev = {
       "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
@@ -74,7 +74,7 @@ variable "roles" {
 
 output "test-01" {
   description = ""
-  value = var.roles.stg[*]
+  value = map(var.roles.stg[*])
 
 }
 # locals {
