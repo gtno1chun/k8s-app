@@ -15,31 +15,64 @@
 #   }
 # }
 
-data "aws_security_groups" "test" {
-  filter {
-    name = "group-name"
-    values = ["*Ubuntu*"]
+# data "aws_security_groups" "test" {
+#   filter {
+#     name = "group-name"
+#     values = ["*Ubuntu*"]
+#   }
+# }
+
+
+# output "security_group_id" {
+#   description = "sgr-id"
+#   value = data.aws_security_groups.test.id
+  
+# }
+# output "security_group_arns" {
+#   description = "sgr-id"
+#   value = data.aws_security_groups.test.arns
+  
+# }
+# output "security_group_ids" {
+#   description = "sgr-id"
+#   value = data.aws_security_groups.test.ids
+  
+# }
+# output "security_group_vpc_ids" {
+#   description = "sgr-id"
+#   value = data.aws_security_groups.test.vpc_ids
+  
+# }
+
+
+variable "roles" {
+  default = {
+    dev = {
+      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
+      "dpl"  = ["dpl"]
+      "media" = ["samsungnotes-batch"]
+      "odigw" = ["odi-batch"]
+    }
+    stg = {
+      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
+      "dpl"  = ["dpl"]
+      "media" = ["samsungnotes-batch"]
+      "odigw" = ["odi-batch"]
+    }
+    prod = {
+      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
+      "dpl"  = ["dpl"]
+      "media" = ["samsungnotes-batch"]
+      "odigw" = ["odi-batch"]
+    }
+    prod-cn = {
+    }
   }
 }
 
+output "test-01" {
+  description = " "
+  value = var.roles.stg[*]
 
-output "security_group_id" {
-  description = "sgr-id"
-  value = data.aws_security_groups.test.id
-  
 }
-output "security_group_arns" {
-  description = "sgr-id"
-  value = data.aws_security_groups.test.arns
-  
-}
-output "security_group_ids" {
-  description = "sgr-id"
-  value = data.aws_security_groups.test.ids
-  
-}
-output "security_group_vpc_ids" {
-  description = "sgr-id"
-  value = data.aws_security_groups.test.vpc_ids
-  
-}
+
