@@ -46,7 +46,7 @@
 
 
 variable "roles" {
-  type = map(list(string))
+  type = map(list)
   default = {
     dev = {
       "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
