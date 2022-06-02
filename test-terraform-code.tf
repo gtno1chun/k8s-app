@@ -72,7 +72,7 @@ variable "roles" {
 
 output "test-01" {
   description = ""
-  value = local.roles_flat[*].name
+  value = local.roles_flat[*]
 
 }
 locals {
