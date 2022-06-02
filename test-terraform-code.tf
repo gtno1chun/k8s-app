@@ -74,7 +74,7 @@ variable "roles" {
 
 output "test-01" {
   description = ""
-  value = map(var.roles.stg[*])
+  value = map(list(var.roles.stg[*]))
 
 }
 # locals {
