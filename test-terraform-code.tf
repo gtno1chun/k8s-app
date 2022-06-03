@@ -102,7 +102,6 @@ variable "roles_old" {
 # }
 
 variable "test" {
-  type = "list"
   var_test = var.roles.stg[*]
 }
 
