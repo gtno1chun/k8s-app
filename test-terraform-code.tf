@@ -97,13 +97,6 @@ variable "roles_old" {
   }
 }
 
-# locals {
-#   test = var.roles.stg[*]
-# }
-
-variable "test" {
-  var_test = var.roles.stg[*]
-}
 
 output "test-01" {
   description = ""
