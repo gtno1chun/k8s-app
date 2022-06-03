@@ -84,7 +84,7 @@ output "test-01" {
 }
 output "test-02" {
   description = "value"
-  value = $element(values(var.roles_old),count.index)} 
+  value = ${element(values(var.roles_old),count.index)} 
   #${element(values(var.apples_account_vpc_ids),count.index)}
 }
 
