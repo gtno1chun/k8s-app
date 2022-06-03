@@ -112,7 +112,7 @@ output "test-01" {
 
 locals {
   roles_flat = flatten([
-    for role in var.roles[local.env] : [
+    for role in var.roles[stg] : [
       for namespace in role.namespaces : {
         name      = role.name,
         namespace = namespace,
