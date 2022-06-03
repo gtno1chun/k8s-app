@@ -101,6 +101,10 @@ variable "roles_old" {
 #   test = var.roles.stg[*]
 # }
 
+variable "test" {
+  type = "list"
+  var_test = var.roles.stg[*]
+}
 
 output "test-01" {
   description = ""
@@ -111,7 +115,7 @@ output "test-01" {
 
 locals {
   roles_flat = flatten([
-    for role in var.roles[local.env] : [
+    for role in var.roles[stg] : [
       for namespace in role.namespaces : {
         name      = role.name,
         namespace = namespace,
