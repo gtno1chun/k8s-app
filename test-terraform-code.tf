@@ -48,12 +48,6 @@
 # "TG" = ["namespaces"]
 variable "roles" {
   default = {
-    dev = [
-      {"name" = "dpl"       , "namespaces" = ["dpl"]},
-      {"name" = "file"      , "namespaces" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]},
-      {"name" = "media"     , "namespaces" = ["samsungnotes-batch"]},
-      {"name" = "odigw"     , "namespaces" = ["odi-batch"]}
-    ]
     stg = [
       {"name" = "dpl"       , "namespaces" = ["dpl"]},
       {"name" = "file"      , "namespaces" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]},
@@ -61,40 +55,25 @@ variable "roles" {
       {"name" = "odigw"     , "namespaces" = ["odi-batch"]},
       {"name" = "backup"    , "namespaces" = ["coedit-batch"]}
     ]
-    prod = [
-      {"name" = "dpl"       , "namespaces" = ["dpl"]},
-      {"name" = "file"      , "namespaces" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]},
-      {"name" = "media"     , "namespaces" = ["samsungnotes-batch"]},
-      {"name" = "odigw"     , "namespaces" = ["odi-batch"]}
-    ]
-    prod-cn = [
-    ]
+
   }
 }
 
 variable "roles_old" {
   default = {
-    dev = {
-      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
-      "dpl"  = ["dpl"]
-      "media" = ["samsungnotes-batch"]
-      "odigw" = ["odi-batch"]
-    }
+
     stg = {
       "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
       "dpl"  = ["dpl"]
       "media" = ["samsungnotes-batch"]
       "odigw" = ["odi-batch"]
     }
-    prod = {
-      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
-      "dpl"  = ["dpl"]
-      "media" = ["samsungnotes-batch"]
-      "odigw" = ["odi-batch"]
-    }
-    prod-cn = {
-    }
   }
+}
+
+locals {
+
+  env          = "stg"
 }
 
 output "test-01" {
@@ -106,7 +85,7 @@ output "test-01" {
 
 locals {
   roles_flat = flatten([
-    for role in var.roles[stg] : [
+    for role in var.roles[local.env] : [
       for namespace in role.namespaces : {
         name      = role.name,
         namespace = namespace,
