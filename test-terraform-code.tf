@@ -78,7 +78,7 @@ locals {
 
 output "test-01" {
   description = ""
-  value = var.roles.stg[*]
+  value = var.roles[local.env]
   #${element(values(var.apples_account_vpc_ids),count.index)}
 
 }
