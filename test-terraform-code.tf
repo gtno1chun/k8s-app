@@ -97,12 +97,6 @@ variable "roles_old" {
   }
 }
 
-
-locals {
-  env = "stg[*]"
-
-
-}
 output "test-01" {
   description = ""
   value = var.roles.stg[*]
