@@ -67,6 +67,7 @@ variable "roles_old" {
       "dpl"  = ["dpl"]
       "media" = ["samsungnotes-batch"]
       "odigw" = ["odi-batch"]
+      "backup" = ["delete"]
     }
   }
 }
