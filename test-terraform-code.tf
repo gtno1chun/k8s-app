@@ -97,15 +97,14 @@ variable "roles_old" {
   }
 }
 
-
-locals {
-  test = var.roles.stg[*]
-}
+# locals {
+#   test = var.roles.stg[*]
+# }
 
 
 output "test-01" {
   description = ""
-  value = local.test
+  value = var.roles.stg[*]
   #${element(values(var.apples_account_vpc_ids),count.index)}
 
 }
