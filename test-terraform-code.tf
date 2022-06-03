@@ -79,8 +79,13 @@ locals {
 output "test-01" {
   description = ""
   value = var.roles[local.env]
-  #${element(values(var.apples_account_vpc_ids),count.index)}
+  
 
+}
+output "test-02" {
+  description = "value"
+  value = $element(values(var.roles_old),count.index)} 
+  #${element(values(var.apples_account_vpc_ids),count.index)}
 }
 
 locals {
