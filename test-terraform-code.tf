@@ -98,6 +98,11 @@ variable "roles_old" {
 }
 
 
+locals {
+  env = stg
+
+
+}
 output "test-01" {
   description = ""
   value = var.roles.stg[*]
@@ -107,7 +112,7 @@ output "test-01" {
 
 locals {
   roles_flat = flatten([
-    for role in var.roles[stg] : [
+    for role in var.roles[local.env : [
       for namespace in role.namespaces : {
         name      = role.name,
         namespace = namespace,
