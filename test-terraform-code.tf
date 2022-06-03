@@ -72,7 +72,7 @@ variable "roles" {
   }
 }
 
-variable "roles" {
+variable "roles_old" {
   default = {
     dev = {
       "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
@@ -99,7 +99,7 @@ variable "roles" {
 
 
 locals {
-test = var.roles.stg[*]
+  test = var.roles.stg[*]
 }
 
 
