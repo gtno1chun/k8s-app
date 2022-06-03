@@ -99,7 +99,7 @@ variable "roles_old" {
 
 
 locals {
-  env = stg
+  env = "stg[*]"
 
 
 }
