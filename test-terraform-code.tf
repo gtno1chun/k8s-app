@@ -45,57 +45,57 @@
 # }
 
 
-# "TG" = ["namespaces"]
-variable "roles" {
-  default = {
-    stg = [
-      {"name" = "dpl"       , "namespaces" = ["dpl"]},
-      {"name" = "file"      , "namespaces" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]},
-      {"name" = "media"     , "namespaces" = ["samsungnotes-batch"]},
-      {"name" = "odigw"     , "namespaces" = ["odi-batch"]},
-      {"name" = "backup"    , "namespaces" = ["coedit-batch"]}
-    ]
+# # "TG" = ["namespaces"]
+# variable "roles" {
+#   default = {
+#     stg = [
+#       {"name" = "dpl"       , "namespaces" = ["dpl"]},
+#       {"name" = "file"      , "namespaces" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]},
+#       {"name" = "media"     , "namespaces" = ["samsungnotes-batch"]},
+#       {"name" = "odigw"     , "namespaces" = ["odi-batch"]},
+#       {"name" = "backup"    , "namespaces" = ["coedit-batch"]}
+#     ]
 
-  }
-}
+#   }
+# }
 
-variable "roles_old" {
-  default = {
+# variable "roles_old" {
+#   default = {
 
-    stg = {
-      "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
-      "dpl"  = ["dpl"]
-      "media" = ["samsungnotes-batch"]
-      "odigw" = ["odi-batch"]
-      "backup" = ["delete"]
-    }
-  }
-}
+#     stg = {
+#       "file" = ["file", "file-batch", "mex", "filemeta", "filemeta-batch", "cdjava"]
+#       "dpl"  = ["dpl"]
+#       "media" = ["samsungnotes-batch"]
+#       "odigw" = ["odi-batch"]
+#       "backup" = ["delete"]
+#     }
+#   }
+# }
 
-locals {
+# locals {
 
-  env          = "stg"
-}
+#   env          = "stg"
+# }
 
-output "test-01" {
-  description = ""
-  value = var.roles[local.env]
+# output "test-01" {
+#   description = ""
+#   value = var.roles[local.env]
   
 
-}
-output "test-02" {
-  description = "value"
-  value = values(var.roles_old)
-  #${element(values(var.apples_account_vpc_ids),count.index)}
-}
+# }
+# output "test-02" {
+#   description = "value"
+#   value = values(var.roles_old)
+#   #${element(values(var.apples_account_vpc_ids),count.index)}
+# }
 
-locals {
-  roles_flat = flatten([
-    for role in var.roles[local.env] : [
-      for namespace in role.namespaces : {
-        name      = role.name,
-        namespace = namespace,
-      }
-    ]
-  ])
-}
+# locals {
+#   roles_flat = flatten([
+#     for role in var.roles[local.env] : [
+#       for namespace in role.namespaces : {
+#         name      = role.name,
+#         namespace = namespace,
+#       }
+#     ]
+#   ])
+# }
