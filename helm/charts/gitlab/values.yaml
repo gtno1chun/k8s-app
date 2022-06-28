@@ -48,8 +48,8 @@ global:
     allowClusterRoles: true
   ## https://docs.gitlab.com/charts/charts/globals#configure-host-settings
   hosts:
-    #domain: example.com
-    domain: a7cbc939d58444517a1329bc6af941f3-1429421346.ap-northeast-2.elb.amazonaws.com
+    domain: example.com
+    # domain: a7cbc939d58444517a1329bc6af941f3-1429421346.ap-northeast-2.elb.amazonaws.com
     hostSuffix:
     https: true
     externalIP:
