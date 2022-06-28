@@ -1,0 +1,23 @@
+resource "kubernetes_namespace" "gitlab_ns" {
+  metadata {
+    annotations = {
+      name = "gitlab"
+    }
+    labels = {
+      role = "gitlab"
+    }
+    name = "gitlab"
+  }
+}
+
+resource "helm_release" "gitlab" {
+  depends_on = [kubernetes_namespace.gitlab_ns]
+
+  name          = "gitlab"
+  namespace     = kubernetes_namespace.gitlab_ns.metadata[0].name
+  repository    = "./helm/chargts
+  chart         = "gitlab"
+  version       = "6.1.0"
+
+
+}
