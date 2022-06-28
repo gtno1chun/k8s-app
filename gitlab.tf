@@ -15,7 +15,7 @@ resource "helm_release" "gitlab" {
 
   name          = "gitlab"
   namespace     = kubernetes_namespace.gitlab_ns.metadata[0].name
-  repository    = "./helm/chargts"
+  repository    = "./helm/charts"
   chart         = "gitlab"
   version       = "6.1.0"
 
