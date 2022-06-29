@@ -1,14 +1,14 @@
-resource "kubernetes_namespace" "argocd_ns" {
-  metadata {
-    annotations = {
-      name = "argocd"
-    }
-    labels = {
-      role = "argocd"
-    }
-    name = "argocd"
-  }
-}
+# resource "kubernetes_namespace" "argocd_ns" {
+#   metadata {
+#     annotations = {
+#       name = "argocd"
+#     }
+#     labels = {
+#       role = "argocd"
+#     }
+#     name = "argocd"
+#   }
+# }
 
 # resource "helm_release" "argo-cd" {
 #   depends_on = [kubernetes_namespace.argocd_ns]
