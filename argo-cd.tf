@@ -10,33 +10,33 @@ resource "kubernetes_namespace" "argocd_ns" {
   }
 }
 
-resource "helm_release" "argo-cd" {
-  depends_on = [kubernetes_namespace.argocd_ns]
+# resource "helm_release" "argo-cd" {
+#   depends_on = [kubernetes_namespace.argocd_ns]
 
-  name          = "argo-cd"
-  namespace     = kubernetes_namespace.argocd_ns.metadata[0].name
-  repository    = "./helm/charts"
-  chart         = "argo-cd"
-  version       = "4.5.0"
+#   name          = "argo-cd"
+#   namespace     = kubernetes_namespace.argocd_ns.metadata[0].name
+#   repository    = "./helm/charts"
+#   chart         = "argo-cd"
+#   version       = "4.5.0"
 
-  values = [
-    file("./helm/values/argocd_values.yaml")
-  ]
+#   values = [
+#     file("./helm/values/argocd_values.yaml")
+#   ]
 
-  set {
-    name    = "repositories.name"
-    value   = "argocd-demo"
-  }
-  set {
-    name    = "repositories.type"
-    value   = "git"
-  }
-  set {
-    name    = "repositories.url"
-    value   = "https://github.com/jenana-devops/argocd-demo.git"
-  }
+#   set {
+#     name    = "repositories.name"
+#     value   = "argocd-demo"
+#   }
+#   set {
+#     name    = "repositories.type"
+#     value   = "git"
+#   }
+#   set {
+#     name    = "repositories.url"
+#     value   = "https://github.com/jenana-devops/argocd-demo.git"
+#   }
 
-}
+# }
 
 # resource "kuberntes_service" "kubernetes-argocd" {
 #   metadata {
