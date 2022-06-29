@@ -1,12 +1,12 @@
 resource "kubernetes_namespace" "argocd_ns" {
   metadata {
     annotations = {
-      name = "argo"
+      name = "argocd"
     }
     labels = {
-      role = "argo"
+      role = "argocd"
     }
-    name = "argo"
+    name = "argocd"
   }
 }
 
@@ -15,7 +15,7 @@ resource "helm_release" "argo-cd" {
 
   name          = "argo-cd"
   namespace     = kubernetes_namespace.argocd_ns.metadata[0].name
-  repository    = "https://argoproj.github.io/argo-helm"
+  repository    = "./helm/charts"
   chart         = "argo-cd"
   version       = "4.5.0"
 
