@@ -63,8 +63,8 @@ configs:
       
     # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
     # `htpasswd -nbBC 10 "" $PASSWORD | tr -d ':\n' | sed 's/$2y/$2a/'`
-    # argocdServerAdminPassword: "$2a$10$S6/.cJWo47H0fYFU1LaYyOLcQmAeactB5u7WTmIp0S2paGb0Y/m/m" 
-    argocdServerAdminPassword: "admin" 
+    argocdServerAdminPassword: "$2a$10$S6/.cJWo47H0fYFU1LaYyOLcQmAeactB5u7WTmIp0S2paGb0Y/m/m" 
+    # argocdServerAdminPassword: "admin" 
 
   # repositories:
   #   - name: argocd-demo
