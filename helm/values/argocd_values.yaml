@@ -1,0 +1,86 @@
+fullnameOverride: argocd
+
+server:
+  replicas: 2
+
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+      #service.beta.kubernetes.io/aws-load-balancer-ssl-cert: ""
+      #service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"  
+
+  extraArgs:
+    - --insecure
+
+  additionalProjects:
+    - name: apps
+      namespace: argocd
+      description: apps project
+      sourceRepos:
+        - "*"
+      destinations:
+        - namespace: "*"
+          server: "*"
+      clusterResourceWhitelist:
+        - group: "*"
+          kind: "*"
+          
+    - name: addons
+      namespace: argocd
+      description: addons project
+      sourceRepos:
+        - "*"
+      destinations:
+        - namespace: "*"
+          server: "*"
+      clusterResourceWhitelist:
+        - group: "*"
+          kind: "*"          
+
+    - name: monitoring
+      namespace: argocd
+      description: monitoring project
+      sourceRepos:
+        - "*"
+      destinations:
+        - namespace: "*"
+          server: "*"
+      clusterResourceWhitelist:
+        - group: "*"
+          kind: "*"
+          
+repoServer:
+  replicas: 2
+
+configs:
+  secret:
+    createSecret: true
+
+    #extra:
+      #server.secretkey: "" # ramdom string
+      
+    # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
+    # `htpasswd -nbBC 10 "" $PASSWORD | tr -d ':\n' | sed 's/$2y/$2a/'`
+    argocdServerAdminPassword: "$2a$10$S6/.cJWo47H0fYFU1LaYyOLcQmAeactB5u7WTmIp0S2paGb0Y/m/m" 
+
+  # repositories:
+  #   - name: argocd-demo
+  #     type: git
+  #     url: https://github.com/jenana-devops/argocd-demo.git 
+
+
+  repositories: {} 
+    # istio-helm-repo:
+    #   url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
+    #   name: istio.io
+    #   type: helm
+    # private-helm-repo:
+    #   url: https://my-private-chart-repo.internal
+    #   name: private-repo
+    #   type: helm
+    #   password: my-password
+    #   username: my-username
+    # private-repo:
+    #   url: https://github.com/argoproj/private-repo
