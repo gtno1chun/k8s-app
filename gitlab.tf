@@ -23,5 +23,7 @@ resource "helm_release" "gitlab" {
     file("./helm/charts/gitlab/values.yaml")
   ]
 
-
+  timeouts {
+    create = "60m"
+  }
 }
