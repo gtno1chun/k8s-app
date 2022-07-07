@@ -8,7 +8,7 @@ resource "kubernetes_namespace" "argocd_ns" {
     }
     name = "argocd"
   }
-}
+} 
 
 resource "helm_release" "argo-cd" {
   depends_on = [kubernetes_namespace.argocd_ns]
