@@ -11,7 +11,7 @@ resource "kubernetes_namespace" "aws-cloudwatch_ns" {
 }
 
 
-resource "helm_release" "cloudwatch-agent" {
+resource "helm_release" "aws-cloudwatch" {
   depends_on = [
     kubernetes_namespace.aws-cloudwatch_ns,
     #helm_release.ebs-csi-controller,
@@ -21,7 +21,7 @@ resource "helm_release" "cloudwatch-agent" {
   chart         = "aws-cloudwatch-metrics"  
   version       = "0.0.7" 
   name          = "aws-cloudwatch-metrics" 
-  namespace     = kubernetes_namespace.aws-cloudwatch_ns.name
+  namespace     = "aws-cloudwatch"  #kubernetes_namespace.aws-cloudwatch_ns.name
 
 
  /* 
