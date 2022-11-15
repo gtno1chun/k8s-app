@@ -10,7 +10,7 @@ resource "kubernetes_namespace" "aws-cloudwatch_ns" {
   }
 }
 
-
+/*
 resource "helm_release" "aws-cloudwatch" {
   depends_on = [
     kubernetes_namespace.aws-cloudwatch_ns,
@@ -23,8 +23,7 @@ resource "helm_release" "aws-cloudwatch" {
   name          = "aws-cloudwatch-metrics" 
   namespace     = "aws-cloudwatch"  #kubernetes_namespace.aws-cloudwatch_ns.name
 
-
- /* 
+ 
   #recreate_pods = true
   values = [ 
     file("./helm/charts/cloudwatch-agent/values.yaml")
@@ -47,7 +46,7 @@ resource "helm_release" "aws-cloudwatch" {
     name  = "resources.requests.memory"
     value = "200Mi"
   }
-*/
 
 
 }
+*/
