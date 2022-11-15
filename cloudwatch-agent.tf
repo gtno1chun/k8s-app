@@ -1,30 +1,30 @@
-resource "kubernetes_namespace" "cloudwatch_ns" {
+resource "kubernetes_namespace" "aws-cloudwatch_ns" {
   metadata {
     annotations = {
-      name = "cloudwatch"
+      name = "aws-cloudwatch"
     }
     labels = {
-      role = "cloudwatch"
+      role = "aws-cloudwatch"
     }
-    name = "cloudwatch"
+    name = "aws-cloudwatch"
   }
 }
 
 
-/*
 resource "helm_release" "cloudwatch-agent" {
   depends_on = [
     kubernetes_namespace.cloudwatch_ns,
     #helm_release.ebs-csi-controller,
   ]
 
-  #repository    = "https://s2504s.github.io/charts"
-  repository    = "amazon/cloudwatch-agent"
-  chart         = "cloudwatch-agent"  
-  version       = "0.0.1" 
-  name          = "cloudwatch-agent" 
-  namespace     = "cloudwatch"
-  
+  repository    = "https://aws.github.io/eks-charts"
+  chart         = "aws-cloudwatch-metrics"  
+  version       = "0.0.7" 
+  name          = "aws-cloudwatch-metrics" 
+  namespace     = kubernetes_namespace.aws-cloudwatch_ns.name
+
+
+ /* 
   #recreate_pods = true
   values = [ 
     file("./helm/charts/cloudwatch-agent/values.yaml")
@@ -47,7 +47,7 @@ resource "helm_release" "cloudwatch-agent" {
     name  = "resources.requests.memory"
     value = "200Mi"
   }
+*/
 
 
 }
-*/
