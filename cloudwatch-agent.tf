@@ -1,3 +1,4 @@
+/*
 resource "kubernetes_namespace" "aws-cloudwatch_ns" {
   metadata {
     annotations = {
@@ -9,6 +10,7 @@ resource "kubernetes_namespace" "aws-cloudwatch_ns" {
     name = "aws-cloudwatch"
   }
 }
+*/
 
 /*
 resource "helm_release" "aws-cloudwatch" {
