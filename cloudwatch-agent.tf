@@ -10,13 +10,16 @@ resource "kubernetes_namespace" "cloudwatch_ns" {
   }
 }
 
+
+/*
 resource "helm_release" "cloudwatch-agent" {
   depends_on = [
     kubernetes_namespace.cloudwatch_ns,
     #helm_release.ebs-csi-controller,
   ]
 
-  repository    = "https://s2504s.github.io/charts"
+  #repository    = "https://s2504s.github.io/charts"
+  repository    = "amazon/cloudwatch-agent"
   chart         = "cloudwatch-agent"  
   version       = "0.0.1" 
   name          = "cloudwatch-agent" 
@@ -27,7 +30,7 @@ resource "helm_release" "cloudwatch-agent" {
     file("./helm/charts/cloudwatch-agent/values.yaml")
   ]
   
-  /*
+  
   set {
     name  = "resources.limits.cpu"
     value = "100m"
@@ -44,7 +47,7 @@ resource "helm_release" "cloudwatch-agent" {
     name  = "resources.requests.memory"
     value = "200Mi"
   }
-  */
-  
+
 
 }
+*/
