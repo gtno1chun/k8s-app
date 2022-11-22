@@ -18,5 +18,3 @@ output "eks-version" {
   description   = "aws_eks_cluster_identity cluster version"
   value         = data.aws_eks_cluster.cluster.version 
 }
-
-
